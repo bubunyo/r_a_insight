@@ -68,6 +68,8 @@
 		});
 		choiceContainer.find("input").click(plotAccordingToChoices);
 
+		
+
 		function plotAccordingToChoices() {
 
 			var data = [];
@@ -81,6 +83,7 @@
 
 			if (data.length > 0) {
 				var plot = $.plot("#placeholder", data, options);
+				
 				var overview = $.plot("#overview", data, {
 					series: {
 						lines: {
@@ -102,13 +105,8 @@
 						mode: "x"
 					}
 				});
-			}
-		}
-		plotAccordingToChoices();
 
-		// now connect the two
-
-		$("#placeholder").bind("plotselected", function (event, ranges) {
+				$("#placeholder").bind("plotselected", function (event, ranges) {
 
 			// do the zooming
 			$.each(plot.getXAxes(), function(_, axis) {
@@ -128,6 +126,13 @@
 		$("#overview").bind("plotselected", function (event, ranges) {
 			plot.setSelection(ranges);
 		});
+			}
+		}
+		plotAccordingToChoices();
+
+		// now connect the two
+
+		
 
 
 		$("<div id='tooltip'></div>").css({
